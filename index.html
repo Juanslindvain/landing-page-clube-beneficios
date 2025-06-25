@@ -71,8 +71,9 @@
         }
 
         .logo-img {
-            height: 50px;
+            height: 60px;
             width: auto;
+            border-radius: 8px;
         }
 
         .logo-text {
@@ -609,6 +610,10 @@
                 gap: 15px;
             }
             
+            .logo-img {
+                height: 50px;
+            }
+            
             .stats-container {
                 padding: 40px 20px;
             }
@@ -648,7 +653,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo-container">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjUiIGN5PSIyNSIgcj0iMjUiIGZpbGw9IiNkNGFmMzciLz4KPHN2ZyB4PSIxMCIgeT0iMTAiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjZmZmZmZmIj4KPHA+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KPHBhdGggZD0ibTkgMTIgMiAyIDQtNCIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4KPC9zdmc+" alt="Logo Clube Supera Saúde" class="logo-img">
+                    <img src="https://i.imgur.com/YourLogoHere.png" alt="Logo Clube Supera Saúde" class="logo-img">
                     <div class="logo-text">Clube Supera Saúde</div>
                 </div>
                 <a href="#cta" class="cta-header">Quero Aderir Agora</a>
@@ -681,7 +686,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Família feliz e saudável" />
+                    <img src="https://i.imgur.com/YourFamilyImageHere.png" alt="Família feliz e saudável" />
                 </div>
             </div>
         </div>
@@ -941,16 +946,6 @@
         // Add loading animation
         window.addEventListener('load', () => {
             document.body.style.opacity = '1';
-        });
-
-        // Preload critical images
-        const preloadImages = [
-            'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
-        ];
-
-        preloadImages.forEach(src => {
-            const img = new Image();
-            img.src = src;
         });
     </script>
 </body>
