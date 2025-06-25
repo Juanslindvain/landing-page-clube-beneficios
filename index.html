@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clube de Benefícios - Saúde e Bem-estar Acessível para Toda Família</title>
-    <meta name="description" content="Acesso à saúde, lazer e educação por apenas R$ 39,90/mês. Mais de 400 parceiros em São Paulo. Consultas, exames e muito mais para até 4 pessoas.">
+    <title>Clube Supera Saúde - Mais de 500 Parceiros para Sua Família</title>
+    <meta name="description" content="Acesso à saúde, lazer e educação por apenas R$ 39,90/mês. Mais de 500 parceiros ativos. Descontos de até 90% para toda família.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for WhatsApp Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         * {
@@ -13,10 +19,24 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-blue: #1a2b4c;
+            --secondary-blue: #2c4a7a;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e99b;
+            --dark-gold: #b8941f;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --text-dark: #2c3e50;
+            --shadow: 0 10px 30px rgba(26, 43, 76, 0.1);
+            --shadow-hover: 0 15px 40px rgba(26, 43, 76, 0.2);
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
 
         .container {
@@ -27,14 +47,15 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3d6f 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
         }
 
         .header-content {
@@ -43,315 +64,581 @@
             align-items: center;
         }
 
-        .logo {
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .cta-header {
-            background: #ff6b35;
-            color: white;
-            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
+            color: var(--white);
+            padding: 12px 24px;
             border: none;
-            border-radius: 25px;
+            border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
 
         .cta-header:hover {
-            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3d6f 100%);
-            color: white;
-            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
+            padding: 140px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23d4af37" stop-opacity="0.1"/><stop offset="100%" stop-color="%23d4af37" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23a)"/><circle cx="800" cy="800" r="400" fill="url(%23a)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            background: linear-gradient(45deg, var(--accent-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .hero-image {
             text-align: center;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: var(--shadow-hover);
         }
 
         .price-highlight {
-            background: #ff6b35;
-            padding: 20px;
-            border-radius: 15px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
+            padding: 25px;
+            border-radius: 20px;
             display: inline-block;
-            margin: 20px 0;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
         }
 
         .price-highlight .price {
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--white);
         }
 
         .price-highlight .period {
             font-size: 1.2rem;
-        }
-
-        .cta-button {
-            background: #28a745;
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin: 20px 10px;
-            transition: all 0.3s;
-            font-weight: bold;
-        }
-
-        .cta-button:hover {
-            background: #218838;
-            transform: translateY(-2px);
+            color: var(--white);
+            opacity: 0.9;
         }
 
         .whatsapp-btn {
-            background: #25d366;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: var(--white);
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
         }
 
         .whatsapp-btn:hover {
-            background: #128c7e;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.4rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
+            color: var(--white);
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--white);
+            padding: 80px 0;
+            margin-top: -50px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .stats-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-hover);
+            padding: 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: 500;
         }
 
         /* Benefits Section */
         .benefits {
-            padding: 80px 0;
-            background: #f8f9fa;
+            padding: 100px 0;
+            background: var(--light-gray);
         }
 
         .benefits h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 3rem;
-            color: #2c5aa0;
+            color: var(--primary-blue);
         }
 
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
         }
 
         .benefit-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
         .benefit-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-gold);
         }
 
         .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .benefit-card h3 {
-            color: #2c5aa0;
+            color: var(--primary-blue);
             margin-bottom: 1rem;
-        }
-
-        /* Problem Section */
-        .problem {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .problem-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .problem h2 {
-            font-size: 2.5rem;
-            color: #2c5aa0;
-            margin-bottom: 2rem;
-        }
-
-        .problem-list {
-            list-style: none;
-        }
-
-        .problem-list li {
-            padding: 10px 0;
-            font-size: 1.1rem;
-            border-left: 4px solid #ff6b35;
-            padding-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        /* Solution Section */
-        .solution {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-
-        .solution h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #2c5aa0;
-        }
-
-        .solution-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .solution-item {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .solution-number {
-            background: #2c5aa0;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .benefit-card p {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: var(--primary-blue);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid var(--light-gray);
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-gold);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .pricing-card h3 {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .period {
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .pricing-card li {
+            padding: 8px 0;
+            color: var(--text-dark);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .pricing-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
             font-weight: bold;
-            margin: 0 auto 20px;
         }
 
         /* Testimonials */
         .testimonials {
-            padding: 80px 0;
-            background: white;
+            padding: 100px 0;
+            background: var(--light-gray);
         }
 
         .testimonials h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 3rem;
-            color: #2c5aa0;
+            color: var(--primary-blue);
         }
 
         .testimonial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
         }
 
         .testimonial {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid #2c5aa0;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent-gold);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
 
         .testimonial-text {
             font-style: italic;
             margin-bottom: 20px;
             font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
         .testimonial-author {
-            font-weight: bold;
-            color: #2c5aa0;
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
         }
 
-        /* CTA Section */
+        /* Final CTA */
         .final-cta {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3d6f 100%);
-            color: white;
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="b" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23d4af37" stop-opacity="0.1"/><stop offset="100%" stop-color="%23d4af37" stop-opacity="0"/></radialGradient></defs><circle cx="300" cy="300" r="400" fill="url(%23b)"/><circle cx="700" cy="700" r="300" fill="url(%23b)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .final-cta-content {
+            position: relative;
+            z-index: 2;
         }
 
         .final-cta h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 2rem;
         }
 
+        .final-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
         .urgency {
-            background: #ff6b35;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
-            font-size: 1.2rem;
-            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
+            padding: 25px;
+            border-radius: 15px;
+            margin: 40px 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
         }
 
         /* Footer */
         footer {
-            background: #333;
-            color: white;
-            padding: 40px 0;
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 60px 0 30px;
             text-align: center;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .problem-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 10px;
-            }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--accent-gold);
         }
 
         /* Floating WhatsApp */
         .floating-whatsapp {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #25d366;
-            color: white;
-            padding: 15px;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: var(--white);
+            padding: 20px;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
             z-index: 1000;
             animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.05); }
             100% { transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .stats-container {
+                padding: 40px 20px;
+            }
+            
+            .benefits h2, .pricing h2, .testimonials h2, .final-cta h2 {
+                font-size: 2.2rem;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .price-highlight .price {
+                font-size: 2.5rem;
+            }
+            
+            .whatsapp-btn, .cta-button {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -360,7 +647,10 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">🏥 Clube de Benefícios SP</div>
+                <div class="logo-container">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjUiIGN5PSIyNSIgcj0iMjUiIGZpbGw9IiNkNGFmMzciLz4KPHN2ZyB4PSIxMCIgeT0iMTAiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjZmZmZmZmIj4KPHA+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KPHBhdGggZD0ibTkgMTIgMiAyIDQtNCIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4KPC9zdmc+" alt="Logo Clube Supera Saúde" class="logo-img">
+                    <div class="logo-text">Clube Supera Saúde</div>
+                </div>
                 <a href="#cta" class="cta-header">Quero Aderir Agora</a>
             </div>
         </div>
@@ -369,66 +659,53 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Saúde Acessível para Toda sua Família</h1>
-            <p>Chega de filas intermináveis no SUS! Acesse consultas médicas, exames e muito mais com desconto de até 70%</p>
-            
-            <div class="price-highlight">
-                <div class="price">R$ 39,90</div>
-                <div class="period">por mês para até 4 pessoas</div>
-            </div>
-            
-            <div>
-                <a href="https://wa.me/5511996076495?text=Olá! Quero conhecer o Clube de Benefícios" class="cta-button whatsapp-btn" >💬 Falar no WhatsApp</a>
-                <a href="#benefits" class="cta-button">📋 Ver Benefícios</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section class="problem">
-        <div class="container">
-            <div class="problem-content">
-                <div>
-                    <h2>Você se identifica com essas situações?</h2>
-                    <ul class="problem-list">
-                        <li>😰 Fica desesperada quando os filhos ficam doentes e o posto está lotado</li>
-                        <li>⏰ Espera meses por uma consulta ou exame no SUS</li>
-                        <li>💸 Planos de saúde são caros demais para o seu orçamento</li>
-                        <li>🏥 Precisa de atendimento médico urgente mas não tem onde ir</li>
-                        <li>💊 Gasta muito com medicamentos e exames particulares</li>
-                    </ul>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Saúde <span class="highlight">Premium</span> para Toda sua Família</h1>
+                    <p>Mais de 500 parceiros ativos em todo Brasil. Descontos de até 90% em farmácias, 70% em exames e muito mais!</p>
+                    
+                    <div class="price-highlight">
+                        <div class="price">R$ 39,90</div>
+                        <div class="period">por mês para até 4 pessoas</div>
+                    </div>
+                    
+                    <div>
+                        <a href="https://wa.me/5511999999999?text=Olá! Quero conhecer o Clube Supera Saúde" class="whatsapp-btn" >
+                            <i class="fab fa-whatsapp"></i>
+                            Falar no WhatsApp
+                        </a>
+                        <a href="#benefits" class="cta-button">
+                            <i class="fas fa-heart"></i>
+                            Ver Benefícios
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Família preocupada com saúde" style="width: 100%; border-radius: 15px;">
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Família feliz e saudável" />
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Solution Section -->
-    <section class="solution">
+    <!-- Stats Section -->
+    <section class="stats">
         <div class="container">
-            <h2>A Solução que Você Estava Procurando</h2>
-            <div class="solution-grid">
-                <div class="solution-item">
-                    <div class="solution-number">1</div>
-                    <h3>Adesão Simples</h3>
-                    <p>Cadastro rápido pelo WhatsApp, sem burocracia ou carência</p>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Parceiros Ativos</div>
                 </div>
-                <div class="solution-item">
-                    <div class="solution-number">2</div>
-                    <h3>Rede Credenciada</h3>
-                    <p>Mais de 400 parceiros em São Paulo e Grande São Paulo</p>
+                <div class="stat-item">
+                    <div class="stat-number">90%</div>
+                    <div class="stat-label">Desconto em Farmácias</div>
                 </div>
-                <div class="solution-item">
-                    <div class="solution-number">3</div>
-                    <h3>Economia Real</h3>
-                    <p>Descontos de até 70% em consultas, exames e medicamentos</p>
+                <div class="stat-item">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Desconto em Exames</div>
                 </div>
-                <div class="solution-item">
-                    <div class="solution-number">4</div>
-                    <h3>Toda Família</h3>
-                    <p>Cobertura para até 4 pessoas por apenas R$ 39,90/mês</p>
+                <div class="stat-item">
+                    <div class="stat-number">87%</div>
+                    <div class="stat-label">Desconto em Educação</div>
                 </div>
             </div>
         </div>
@@ -437,37 +714,97 @@
     <!-- Benefits Section -->
     <section class="benefits" id="benefits">
         <div class="container">
-            <h2>O que Você Vai Ter Acesso</h2>
+            <h2>Benefícios Exclusivos para Você</h2>
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <div class="benefit-icon">🩺</div>
-                    <h3>Consultas Médicas</h3>
-                    <p>Clínico geral, pediatra, ginecologista e mais de 30 especialidades com desconto</p>
+                    <div class="benefit-icon">🏥</div>
+                    <h3>Saúde Completa</h3>
+                    <p>Consultas médicas, exames laboratoriais, telemedicina e mais de 20 especialidades com descontos especiais</p>
                 </div>
                 <div class="benefit-card">
-                    <div class="benefit-icon">🔬</div>
-                    <h3>Exames Laboratoriais</h3>
-                    <p>Sangue, urina, fezes e exames de imagem com preços especiais</p>
+                    <div class="benefit-icon">💊</div>
+                    <h3>Farmácias</h3>
+                    <p>Até 90% de desconto em medicamentos nas principais redes: Drogasil, Raia, Panvel, Araujo e muitas outras</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">🦷</div>
                     <h3>Odontologia</h3>
-                    <p>Consultas, limpeza, obturações e tratamentos odontológicos</p>
+                    <p>Tratamentos dentários completos com preços especiais para toda família</p>
                 </div>
                 <div class="benefit-card">
-                    <div class="benefit-icon">💊</div>
-                    <h3>Medicamentos</h3>
-                    <p>Descontos em farmácias credenciadas para toda família</p>
+                    <div class="benefit-icon">🏋️</div>
+                    <h3>Bem-estar</h3>
+                    <p>Academias, pilates, spas e atividades físicas com descontos exclusivos</p>
                 </div>
                 <div class="benefit-card">
-                    <div class="benefit-icon">💆</div>
-                    <h3>Estética e Bem-estar</h3>
-                    <p>Massagens, tratamentos estéticos e cuidados pessoais</p>
+                    <div class="benefit-icon">🎓</div>
+                    <h3>Educação</h3>
+                    <p>Até 87% de desconto em cursos, graduação e pós-graduação nas melhores instituições</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">🍽️</div>
-                    <h3>Alimentação e Lazer</h3>
-                    <p>Descontos em restaurantes, cinemas e atividades de lazer</p>
+                    <h3>Lazer & Gastronomia</h3>
+                    <p>Restaurantes, cinemas, viagens e entretenimento com preços especiais</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2>Escolha seu Plano</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card featured">
+                    <h3>Família Básica</h3>
+                    <div class="price">R$ 39,90</div>
+                    <div class="period">por mês</div>
+                    <ul>
+                        <li>Titular + 3 dependentes</li>
+                        <li>Mais de 500 parceiros</li>
+                        <li>Descontos de até 90%</li>
+                        <li>Carteirinha digital</li>
+                        <li>Sem carência</li>
+                        <li>Fidelidade 12 meses</li>
+                    </ul>
+                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=site&plano=1c3aff58-ee80-4dee-b129-d8c576c5c6d0" class="whatsapp-btn" >
+                        <i class="fab fa-whatsapp"></i>
+                        Contratar Agora
+                    </a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Família Plus</h3>
+                    <div class="price">R$ 49,90</div>
+                    <div class="period">por mês</div>
+                    <ul>
+                        <li>Titular + 4 dependentes</li>
+                        <li>Mais de 500 parceiros</li>
+                        <li>Descontos de até 90%</li>
+                        <li>Carteirinha digital</li>
+                        <li>Sem carência</li>
+                        <li>Fidelidade 12 meses</li>
+                    </ul>
+                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=site&plano=1c3aff58-ee80-4dee-b129-d8c576c5c6d0" class="cta-button" >
+                        <i class="fas fa-star"></i>
+                        Contratar Agora
+                    </a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Família Premium</h3>
+                    <div class="price">R$ 59,90</div>
+                    <div class="period">por mês</div>
+                    <ul>
+                        <li>Titular + 5 dependentes</li>
+                        <li>Mais de 500 parceiros</li>
+                        <li>Descontos de até 90%</li>
+                        <li>Carteirinha digital</li>
+                        <li>Sem carência</li>
+                        <li>Fidelidade 12 meses</li>
+                    </ul>
+                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=site&plano=1c3aff58-ee80-4dee-b129-d8c576c5c6d0" class="cta-button" >
+                        <i class="fas fa-crown"></i>
+                        Contratar Agora
+                    </a>
                 </div>
             </div>
         </div>
@@ -479,16 +816,16 @@
             <h2>O que Nossos Associados Dizem</h2>
             <div class="testimonial-grid">
                 <div class="testimonial">
-                    <div class="testimonial-text">"Finalmente encontrei uma solução que cabe no meu bolso! Consegui levar minha filha ao pediatra no mesmo dia que ela ficou doente."</div>
-                    <div class="testimonial-author">- Maria Santos, Recepcionista</div>
+                    <div class="testimonial-text">"Economizei mais de R$ 300 no primeiro mês! Os descontos são reais e a rede de parceiros é excelente."</div>
+                    <div class="testimonial-author">- Maria Santos, Professora</div>
                 </div>
                 <div class="testimonial">
-                    <div class="testimonial-text">"Os descontos são reais! Economizei mais de R$ 200 só no primeiro mês com exames que precisava fazer."</div>
-                    <div class="testimonial-author">- João Silva, Motorista</div>
+                    <div class="testimonial-text">"Finalmente encontrei uma solução que cabe no meu orçamento. Toda família está protegida!"</div>
+                    <div class="testimonial-author">- João Silva, Comerciante</div>
                 </div>
                 <div class="testimonial">
-                    <div class="testimonial-text">"Muito prático pelo WhatsApp. Consegui agendar consulta para minha mãe em poucos minutos."</div>
-                    <div class="testimonial-author">- Ana Oliveira, Vendedora</div>
+                    <div class="testimonial-text">"O atendimento é rápido e os parceiros são de qualidade. Recomendo para todas as famílias!"</div>
+                    <div class="testimonial-author">- Ana Oliveira, Enfermeira</div>
                 </div>
             </div>
         </div>
@@ -497,33 +834,58 @@
     <!-- Final CTA -->
     <section class="final-cta" id="cta">
         <div class="container">
-            <h2>Não Deixe sua Família Desprotegida</h2>
-            <p>Junte-se a mais de 10.000 famílias que já garantiram acesso à saúde de qualidade</p>
-            
-            <div class="urgency">
-                ⚡ OFERTA ESPECIAL: Primeira mensalidade por apenas R$ 19,90
+            <div class="final-cta-content">
+                <h2>Não Deixe sua Família Desprotegida</h2>
+                <p>Junte-se a milhares de famílias que já garantiram acesso à saúde de qualidade</p>
+                
+                <div class="urgency">
+                    ⚡ OFERTA ESPECIAL: Sem taxa de adesão este mês!
+                </div>
+                
+                <div>
+                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=site&plano=1c3aff58-ee80-4dee-b129-d8c576c5c6d0" class="whatsapp-btn" >
+                        <i class="fab fa-whatsapp"></i>
+                        Aderir Agora
+                    </a>
+                </div>
+                
+                <p style="margin-top: 30px; font-size: 1rem; opacity: 0.8;">
+                    ✅ Sem carência | ✅ Ativação imediata | ✅ Mais de 500 parceiros
+                </p>
             </div>
-            
-            <div>
-                <a href="https://wa.me/5511996076495?text=Olá! Quero aderir ao Clube de Benefícios com desconto especial" class="cta-button whatsapp-btn" >💬 Aderir Agora no WhatsApp</a>
-            </div>
-            
-            <p style="margin-top: 20px; font-size: 0.9rem;">✅ Sem carência | ✅ Sem burocracia | ✅ Ativação imediata</p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Clube de Benefícios SP. Todos os direitos reservados.</p>
-            <p>📍 Av. Satélite, 112 | Cidade Satelite
-Santa Barbara | São Paulo/SP | 📞 (11) 99607-6495 | 📧 clubeuperasaude@clubesuperasaude.com.br</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Clube Supera Saúde</h3>
+                    <p>Mais que um convênio de saúde, é um clube de vantagens para promover um estilo de vida saudável.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📞 (11) 99999-9999</p>
+                    <p>📧 contato@clubesuperasaude.com.br</p>
+                    <p>📍 São Paulo - SP</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Úteis</h3>
+                    <p><a href="#benefits">Benefícios</a></p>
+                    <p><a href="#pricing">Planos</a></p>
+                    <p><a href="#testimonials">Depoimentos</a></p>
+                </div>
+            </div>
+            <p style="text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+                &copy; 2025 Clube Supera Saúde. Todos os direitos reservados.
+            </p>
         </div>
     </footer>
 
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/5511996076495?text=Olá! Tenho interesse no Clube de Benefícios" class="floating-whatsapp" >
-        💬
+    <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no Clube Supera Saúde" class="floating-whatsapp" >
+        <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
@@ -531,13 +893,17 @@ Santa Barbara | São Paulo/SP | 📞 (11) 99607-6495 | 📧 clubeuperasaude@club
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
-        // Add animation on scroll
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -552,12 +918,39 @@ Santa Barbara | São Paulo/SP | 📞 (11) 99607-6495 | 📧 clubeuperasaude@club
             });
         }, observerOptions);
 
-        // Observe all benefit cards and solution items
-        document.querySelectorAll('.benefit-card, .solution-item, .testimonial').forEach(el => {
+        // Observe elements for animation
+        document.querySelectorAll('.benefit-card, .pricing-card, .testimonial, .stat-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
             observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 43, 76, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+
+        // Preload critical images
+        const preloadImages = [
+            'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+        ];
+
+        preloadImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
         });
     </script>
 </body>
