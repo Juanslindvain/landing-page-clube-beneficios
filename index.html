@@ -7,10 +7,13 @@
     <meta name="description" content="Acesso à saúde, lazer e educação por apenas R$ 39,90/mês. Mais de 500 parceiros ativos. Descontos de até 90% para toda família.">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome for WhatsApp Icon -->
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         * {
@@ -29,14 +32,17 @@
             --light-gray: #f8f9fa;
             --text-dark: #2c3e50;
             --shadow: 0 10px 30px rgba(26, 43, 76, 0.1);
-            --shadow-hover: 0 15px 40px rgba(26, 43, 76, 0.2);
+            --shadow-hover: 0 20px 60px rgba(26, 43, 76, 0.2);
+            --gradient-primary: linear-gradient(135deg, #1a2b4c 0%, #2c4a7a 50%, #1a2b4c 100%);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4e99b 50%, #b8941f 100%);
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -45,17 +51,89 @@
             padding: 0 20px;
         }
 
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: var(--white);
+        }
+
+        .loader-logo {
+            width: 80px;
+            height: 80px;
+            border: 4px solid var(--accent-gold);
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            background: rgba(26, 43, 76, 0.95);
+            backdrop-filter: blur(20px);
             color: var(--white);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        header.scrolled {
+            background: rgba(26, 43, 76, 0.98);
             box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
         }
 
         .header-content {
@@ -73,43 +151,97 @@
         .logo-img {
             height: 60px;
             width: auto;
-            border-radius: 8px;
-            background: white;
-            padding: 5px;
+            border-radius: 12px;
+            background: var(--white);
+            padding: 8px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
         }
 
         .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--accent-gold), var(--light-gold));
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .cta-header {
-            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
             color: var(--white);
-            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cta-header {
+            background: var(--gradient-gold);
+            color: var(--white);
+            padding: 12px 30px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-header:hover::before {
+            left: 100%;
         }
 
         .cta-header:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            min-height: 100vh;
+            background: var(--gradient-primary);
             color: var(--white);
-            padding: 140px 0 100px;
+            display: flex;
+            align-items: center;
             position: relative;
             overflow: hidden;
         }
@@ -121,309 +253,548 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23d4af37" stop-opacity="0.1"/><stop offset="100%" stop-color="%23d4af37" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23a)"/><circle cx="800" cy="800" r="400" fill="url(%23a)"/></svg>');
-            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .hero-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 80px;
             align-items: center;
             position: relative;
             z-index: 2;
+            padding: 120px 0 80px;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero-text .highlight {
-            background: linear-gradient(45deg, var(--accent-gold), var(--light-gold));
+            background: var(--gradient-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .hero-text p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
             font-weight: 400;
+            line-height: 1.6;
         }
 
         .hero-image {
+            position: relative;
             text-align: center;
         }
 
         .hero-image img {
             max-width: 100%;
             height: auto;
-            border-radius: 20px;
+            border-radius: 25px;
             box-shadow: var(--shadow-hover);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            opacity: 0.6;
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .floating-icon:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+        .floating-icon:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 3s; }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
 
         .price-highlight {
-            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
-            padding: 25px;
-            border-radius: 20px;
+            background: var(--gradient-gold);
+            padding: 30px;
+            border-radius: 25px;
             display: inline-block;
             margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: priceShine 3s linear infinite;
+        }
+
+        @keyframes priceShine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .price-highlight .price {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 4rem;
+            font-weight: 900;
             color: var(--white);
+            position: relative;
+            z-index: 2;
         }
 
         .price-highlight .period {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--white);
-            opacity: 0.9;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .whatsapp-btn {
-            background: linear-gradient(45deg, #25d366, #128c7e);
+            background: linear-gradient(135deg, #25d366, #128c7e);
             color: var(--white);
-            padding: 18px 40px;
+            padding: 20px 45px;
             border: none;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .whatsapp-btn:hover::before {
+            left: 100%;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-3px); }
+            60% { transform: translateY(-2px); }
+        }
+
+        .cta-button {
+            background: var(--gradient-gold);
+            color: var(--white);
+            padding: 20px 45px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            margin: 20px 10px;
             transition: all 0.3s ease;
             font-weight: 600;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
         }
 
-        .whatsapp-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
         }
 
-        .whatsapp-btn i {
-            font-size: 1.4rem;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
-            color: var(--white);
-            padding: 18px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 10px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.5);
         }
 
         /* Stats Section */
         .stats {
             background: var(--white);
-            padding: 80px 0;
-            margin-top: -50px;
+            padding: 100px 0;
+            margin-top: -80px;
             position: relative;
             z-index: 3;
         }
 
         .stats-container {
             background: var(--white);
-            border-radius: 20px;
+            border-radius: 30px;
             box-shadow: var(--shadow-hover);
-            padding: 60px;
+            padding: 80px 60px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            gap: 50px;
             text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .stat-item {
-            padding: 20px;
+            position: relative;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
         }
 
         .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            counter-reset: number;
+            animation: countUp 2s ease-out;
         }
 
         .stat-label {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-dark);
-            font-weight: 500;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Benefits Section */
         .benefits {
-            padding: 100px 0;
-            background: var(--light-gray);
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            position: relative;
+        }
+
+        .benefits::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23d4af37" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
 
         .benefits h2 {
             text-align: center;
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-            color: var(--primary-blue);
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 4rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .benefits h2::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
         }
 
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
         }
 
         .benefit-card {
             background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
+            padding: 50px;
+            border-radius: 25px;
             text-align: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(26, 43, 76, 0.08);
+            transition: all 0.4s ease;
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .benefit-card:hover::before {
+            left: 100%;
         }
 
         .benefit-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(26, 43, 76, 0.15);
             border-color: var(--accent-gold);
         }
 
         .benefit-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--accent-gold), var(--light-gold));
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: inline-block;
+            animation: iconPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .benefit-card h3 {
             color: var(--primary-blue);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
         }
 
         .benefit-card p {
             color: var(--text-dark);
             font-size: 1.1rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            opacity: 0.9;
         }
 
         /* Pricing Section */
         .pricing {
-            padding: 100px 0;
-            background: var(--white);
+            padding: 120px 0;
+            background: var(--gradient-primary);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
         }
 
         .pricing h2 {
             text-align: center;
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-            color: var(--primary-blue);
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pricing h2::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
         }
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .pricing-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 25px;
             text-align: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 2px solid var(--light-gray);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            border: 2px solid rgba(212, 175, 55, 0.2);
             position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-gold);
         }
 
         .pricing-card.featured {
+            transform: scale(1.08);
             border-color: var(--accent-gold);
-            transform: scale(1.05);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.3);
         }
 
-        .pricing-card.featured::before {
+        .pricing-card.featured::after {
             content: 'MAIS POPULAR';
             position: absolute;
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
+            background: var(--gradient-gold);
             color: var(--white);
-            padding: 8px 20px;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 25px;
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
         }
 
         .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-5px);
+            transform: scale(1.08) translateY(-10px);
         }
 
         .pricing-card h3 {
             color: var(--primary-blue);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 25px;
         }
 
         .pricing-card .price {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--accent-gold);
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
         }
 
         .pricing-card .period {
             color: var(--text-dark);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
+            margin-bottom: 35px;
+            font-size: 1.2rem;
+            opacity: 0.8;
         }
 
         .pricing-card ul {
             list-style: none;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: left;
         }
 
         .pricing-card li {
-            padding: 8px 0;
+            padding: 12px 0;
             color: var(--text-dark);
             position: relative;
-            padding-left: 25px;
+            padding-left: 35px;
+            font-size: 1.1rem;
         }
 
         .pricing-card li::before {
@@ -432,60 +803,89 @@
             left: 0;
             color: var(--accent-gold);
             font-weight: bold;
+            font-size: 1.3rem;
         }
 
         /* Testimonials */
         .testimonials {
-            padding: 100px 0;
-            background: var(--light-gray);
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
         }
 
         .testimonials h2 {
             text-align: center;
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-            color: var(--primary-blue);
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 4rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .testimonials h2::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
         }
 
         .testimonial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
         }
 
         .testimonial {
             background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            border-left: 5px solid var(--accent-gold);
-            transition: all 0.3s ease;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(26, 43, 76, 0.08);
+            border-left: 6px solid var(--accent-gold);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 4rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+            font-family: serif;
         }
 
         .testimonial:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(26, 43, 76, 0.12);
         }
 
         .testimonial-text {
             font-style: italic;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
             color: var(--text-dark);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .testimonial-author {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary-blue);
             font-size: 1.1rem;
         }
 
         /* Final CTA */
         .final-cta {
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            padding: 120px 0;
+            background: var(--gradient-primary);
             color: var(--white);
             text-align: center;
             position: relative;
@@ -499,8 +899,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="b" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23d4af37" stop-opacity="0.1"/><stop offset="100%" stop-color="%23d4af37" stop-opacity="0"/></radialGradient></defs><circle cx="300" cy="300" r="400" fill="url(%23b)"/><circle cx="700" cy="700" r="300" fill="url(%23b)"/></svg>');
-            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            animation: gradientShift 8s ease-in-out infinite;
         }
 
         .final-cta-content {
@@ -509,59 +911,67 @@
         }
 
         .final-cta h2 {
-            font-size: 3rem;
-            font-weight: 800;
+            font-size: 3.5rem;
+            font-weight: 900;
             margin-bottom: 2rem;
         }
 
         .final-cta p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
         }
 
         .urgency {
-            background: linear-gradient(45deg, var(--accent-gold), var(--dark-gold));
-            padding: 25px;
-            border-radius: 15px;
-            margin: 40px 0;
-            font-size: 1.3rem;
+            background: var(--gradient-gold);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 50px 0;
+            font-size: 1.4rem;
             font-weight: 700;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            animation: urgencyPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes urgencyPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         /* Footer */
         footer {
             background: var(--primary-blue);
             color: var(--white);
-            padding: 60px 0 30px;
-            text-align: center;
+            padding: 80px 0 40px;
+            position: relative;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
         }
 
         .footer-section h3 {
             color: var(--accent-gold);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
             font-weight: 700;
         }
 
         .footer-section p, .footer-section a {
             color: var(--white);
             text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            line-height: 1.6;
         }
 
         .footer-section a:hover {
             opacity: 1;
             color: var(--accent-gold);
+            transform: translateX(5px);
         }
 
         /* Floating WhatsApp */
@@ -569,47 +979,65 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(45deg, #25d366, #128c7e);
+            background: linear-gradient(135deg, #25d366, #128c7e);
             color: var(--white);
             padding: 20px;
             border-radius: 50%;
-            font-size: 1.8rem;
+            font-size: 2rem;
             text-decoration: none;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
             z-index: 1000;
-            animation: pulse 2s infinite;
+            animation: floatWhatsApp 3s ease-in-out infinite;
             transition: all 0.3s ease;
         }
 
         .floating-whatsapp:hover {
             transform: scale(1.1);
-            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        @keyframes floatWhatsApp {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 50px;
             }
             
             .hero-text h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .hero-text p {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .header-content {
-                flex-direction: column;
-                gap: 15px;
+                flex-wrap: wrap;
+                gap: 20px;
             }
             
             .logo-img {
@@ -617,11 +1045,12 @@
             }
             
             .stats-container {
-                padding: 40px 20px;
+                padding: 60px 30px;
+                gap: 30px;
             }
             
             .benefits h2, .pricing h2, .testimonials h2, .final-cta h2 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .pricing-card.featured {
@@ -629,35 +1058,69 @@
             }
             
             .pricing-card.featured:hover {
-                transform: translateY(-5px);
+                transform: translateY(-10px);
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .benefits-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 480px) {
             .hero-text h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .price-highlight .price {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
             
             .whatsapp-btn, .cta-button {
-                padding: 15px 30px;
-                font-size: 1rem;
+                padding: 18px 35px;
+                font-size: 1.1rem;
+            }
+            
+            .benefit-card, .testimonial, .pricing-card {
+                padding: 35px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo"></div>
+            <h3>Carregando...</h3>
+        </div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo-container">
                     <img src="https://i.imgur.com/6BoFl3H.png" alt="Logo Clube Supera Saúde" class="logo-img">
                     <div class="logo-text">Clube Supera Saúde</div>
                 </div>
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#benefits">Benefícios</a></li>
+                        <li><a href="#pricing">Planos</a></li>
+                        <li><a href="#testimonials">Depoimentos</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                    <button class="mobile-menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
                 <a href="#cta" class="cta-header">Quero Aderir Agora</a>
             </div>
         </div>
@@ -665,9 +1128,16 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="floating-elements">
+            <div class="floating-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="floating-icon"><i class="fas fa-pills"></i></div>
+            <div class="floating-icon"><i class="fas fa-user-md"></i></div>
+            <div class="floating-icon"><i class="fas fa-stethoscope"></i></div>
+        </div>
+        
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
+                <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
                     <h1>Saúde <span class="highlight">Premium</span> para Toda sua Família</h1>
                     <p>Mais de 500 parceiros ativos em todo Brasil. Descontos de até 90% em farmácias, 70% em exames e muito mais!</p>
                     
@@ -676,7 +1146,7 @@
                         <div class="period">por mês para até 4 pessoas</div>
                     </div>
                     
-                    <div>
+                    <div class="hero-buttons">
                         <a href="https://wa.me/5511996076495?text=Olá! Quero conhecer o Clube Supera Saúde" class="whatsapp-btn" >
                             <i class="fab fa-whatsapp"></i>
                             Falar no WhatsApp
@@ -687,7 +1157,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="hero-image">
+                <div class="hero-image" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
                     <img src="https://i.imgur.com/gi8ovU7.png" alt="Família feliz e saudável" />
                 </div>
             </div>
@@ -697,21 +1167,21 @@
     <!-- Stats Section -->
     <section class="stats">
         <div class="container">
-            <div class="stats-container">
+            <div class="stats-container" data-aos="fade-up" data-aos-duration="800">
                 <div class="stat-item">
-                    <div class="stat-number">500+</div>
+                    <div class="stat-number" data-count="500">500+</div>
                     <div class="stat-label">Parceiros Ativos</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">90%</div>
+                    <div class="stat-number" data-count="90">90%</div>
                     <div class="stat-label">Desconto em Farmácias</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">70%</div>
+                    <div class="stat-number" data-count="70">70%</div>
                     <div class="stat-label">Desconto em Exames</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">87%</div>
+                    <div class="stat-number" data-count="87">87%</div>
                     <div class="stat-label">Desconto em Educação</div>
                 </div>
             </div>
@@ -721,34 +1191,34 @@
     <!-- Benefits Section -->
     <section class="benefits" id="benefits">
         <div class="container">
-            <h2>Benefícios Exclusivos para Você</h2>
+            <h2 data-aos="fade-up">Benefícios Exclusivos para Você</h2>
             <div class="benefits-grid">
-                <div class="benefit-card">
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="benefit-icon">🏥</div>
                     <h3>Saúde Completa</h3>
                     <p>Consultas médicas, exames laboratoriais, telemedicina e mais de 20 especialidades com descontos especiais</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="benefit-icon">💊</div>
                     <h3>Farmácias</h3>
                     <p>Até 90% de desconto em medicamentos nas principais redes: Drogasil, Raia, Panvel, Araujo e muitas outras</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="benefit-icon">🦷</div>
                     <h3>Odontologia</h3>
                     <p>Tratamentos dentários completos com preços especiais para toda família</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="benefit-icon">🏋️</div>
                     <h3>Bem-estar</h3>
                     <p>Academias, pilates, spas e atividades físicas com descontos exclusivos</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="benefit-icon">🎓</div>
                     <h3>Educação</h3>
                     <p>Até 87% de desconto em cursos, graduação e pós-graduação nas melhores instituições</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="600">
                     <div class="benefit-icon">🍽️</div>
                     <h3>Lazer & Gastronomia</h3>
                     <p>Restaurantes, cinemas, viagens e entretenimento com preços especiais</p>
@@ -758,11 +1228,11 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing">
+    <section class="pricing" id="pricing">
         <div class="container">
-            <h2>Escolha seu Plano</h2>
+            <h2 data-aos="fade-up">Escolha seu Plano</h2>
             <div class="pricing-grid">
-                <div class="pricing-card featured">
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
                     <h3>Família Básica</h3>
                     <div class="price">R$ 39,90</div>
                     <div class="period">por mês</div>
@@ -774,12 +1244,12 @@
                         <li>Sem carência</li>
                         <li>Fidelidade 12 meses</li>
                     </ul>
-                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=campanha" class="whatsapp-btn" >
-                        <i class="fab fa-whatsapp"></i>
+                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=campanha" class="cta-button" >
+                        <i class="fas fa-star"></i>
                         Contratar Agora
                     </a>
                 </div>
-                <div class="pricing-card">
+                <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="200">
                     <h3>Família Plus</h3>
                     <div class="price">R$ 49,90</div>
                     <div class="period">por mês</div>
@@ -791,12 +1261,12 @@
                         <li>Sem carência</li>
                         <li>Fidelidade 12 meses</li>
                     </ul>
-                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=campanha" class="cta-button" >
-                        <i class="fas fa-star"></i>
+                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=campanha" class="whatsapp-btn" >
+                        <i class="fab fa-whatsapp"></i>
                         Contratar Agora
                     </a>
                 </div>
-                <div class="pricing-card">
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="300">
                     <h3>Família Premium</h3>
                     <div class="price">R$ 59,90</div>
                     <div class="period">por mês</div>
@@ -807,148 +1277,4 @@
                         <li>Carteirinha digital</li>
                         <li>Sem carência</li>
                         <li>Fidelidade 12 meses</li>
-                    </ul>
-                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=campanha" class="cta-button" >
-                        <i class="fas fa-crown"></i>
-                        Contratar Agora
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials">
-        <div class="container">
-            <h2>O que Nossos Associados Dizem</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial">
-                    <div class="testimonial-text">"Economizei mais de R$ 300 no primeiro mês! Os descontos são reais e a rede de parceiros é excelente."</div>
-                    <div class="testimonial-author">- Maria Santos, Professora</div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-text">"Finalmente encontrei uma solução que cabe no meu orçamento. Toda família está protegida!"</div>
-                    <div class="testimonial-author">- João Silva, Comerciante</div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-text">"O atendimento é rápido e os parceiros são de qualidade. Recomendo para todas as famílias!"</div>
-                    <div class="testimonial-author">- Ana Oliveira, Enfermeira</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="final-cta" id="cta">
-        <div class="container">
-            <div class="final-cta-content">
-                <h2>Não Deixe sua Família Desprotegida</h2>
-                <p>Junte-se a milhares de famílias que já garantiram acesso à saúde de qualidade</p>
-                
-                <div class="urgency">
-                    ⚡ OFERTA ESPECIAL: Vagas limitadas!
-                </div>
-                
-                <div>
-                    <a href="https://clubesuperasaude.faturasimples.com.br/contratar/familia?custom_vendedor=campanha" class="whatsapp-btn" >
-                        <i class="fab fa-whatsapp"></i>
-                        Aderir Agora
-                    </a>
-                </div>
-                
-                <p style="margin-top: 30px; font-size: 1rem; opacity: 0.8;">
-                    ✅ Sem carência | ✅ Ativação imediata | ✅ Mais de 500 parceiros
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Clube Supera Saúde</h3>
-                    <p>Mais que um convênio de saúde, é um clube de vantagens para promover um estilo de vida saudável.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Contato</h3>
-                    <p>📞 (11) 99607-6495</p>
-                    <p>📧 clubesuperasaude@clubesuperasaude.com.br</p>
-                    <p>📍 Av. Satélite, 112 | Cidade Satelite<br>Santa Barbara | São Paulo/SP</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Links Úteis</h3>
-                    <p><a href="#benefits">Benefícios</a></p>
-                    <p><a href="#pricing">Planos</a></p>
-                    <p><a href="#testimonials">Depoimentos</a></p>
-                </div>
-            </div>
-            <p style="text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
-                &copy; 2025 Clube Supera Saúde. Todos os direitos reservados.
-            </p>
-        </div>
-    </footer>
-
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/5511996076495?text=Olá! Tenho interesse no Clube Supera Saúde" class="floating-whatsapp" >
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.benefit-card, .pricing-card, .testimonial, .stat-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            observer.observe(el);
-        });
-
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(26, 43, 76, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%)';
-                header.style.backdropFilter = 'none';
-            }
-        });
-
-        // Add loading animation
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '1';
-        });
-    </script>
-</body>
-</html>
+                    
