@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clube de Benefícios - Saúde e Bem-estar Acessível para Toda Família</title>
+    <meta name="description" content="Acesso à saúde, lazer e educação por apenas R$ 39,90/mês. Mais de 400 parceiros em São Paulo. Consultas, exames e muito mais para até 4 pessoas.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3d6f 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .cta-header {
+            background: #ff6b35;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .cta-header:hover {
+            background: #e55a2b;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3d6f 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .price-highlight {
+            background: #ff6b35;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .price-highlight .price {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .price-highlight .period {
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            background: #28a745;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 10px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128c7e;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5aa0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .problem-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .problem h2 {
+            font-size: 2.5rem;
+            color: #2c5aa0;
+            margin-bottom: 2rem;
+        }
+
+        .problem-list {
+            list-style: none;
+        }
+
+        .problem-list li {
+            padding: 10px 0;
+            font-size: 1.1rem;
+            border-left: 4px solid #ff6b35;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .solution h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5aa0;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .solution-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .solution-number {
+            background: #2c5aa0;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5aa0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #2c5aa0;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3d6f 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .urgency {
+            background: #ff6b35;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .problem-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Floating WhatsApp */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🏥 Clube de Benefícios SP</div>
+                <a href="#cta" class="cta-header">Quero Aderir Agora</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Saúde Acessível para Toda sua Família</h1>
+            <p>Chega de filas intermináveis no SUS! Acesse consultas médicas, exames e muito mais com desconto de até 70%</p>
+            
+            <div class="price-highlight">
+                <div class="price">R$ 39,90</div>
+                <div class="period">por mês para até 4 pessoas</div>
+            </div>
+            
+            <div>
+                <a href="https://wa.me/5511996076495?text=Olá! Quero conhecer o Clube de Benefícios" class="cta-button whatsapp-btn" >💬 Falar no WhatsApp</a>
+                <a href="#benefits" class="cta-button">📋 Ver Benefícios</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <div class="problem-content">
+                <div>
+                    <h2>Você se identifica com essas situações?</h2>
+                    <ul class="problem-list">
+                        <li>😰 Fica desesperada quando os filhos ficam doentes e o posto está lotado</li>
+                        <li>⏰ Espera meses por uma consulta ou exame no SUS</li>
+                        <li>💸 Planos de saúde são caros demais para o seu orçamento</li>
+                        <li>🏥 Precisa de atendimento médico urgente mas não tem onde ir</li>
+                        <li>💊 Gasta muito com medicamentos e exames particulares</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Família preocupada com saúde" style="width: 100%; border-radius: 15px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <h2>A Solução que Você Estava Procurando</h2>
+            <div class="solution-grid">
+                <div class="solution-item">
+                    <div class="solution-number">1</div>
+                    <h3>Adesão Simples</h3>
+                    <p>Cadastro rápido pelo WhatsApp, sem burocracia ou carência</p>
+                </div>
+                <div class="solution-item">
+                    <div class="solution-number">2</div>
+                    <h3>Rede Credenciada</h3>
+                    <p>Mais de 400 parceiros em São Paulo e Grande São Paulo</p>
+                </div>
+                <div class="solution-item">
+                    <div class="solution-number">3</div>
+                    <h3>Economia Real</h3>
+                    <p>Descontos de até 70% em consultas, exames e medicamentos</p>
+                </div>
+                <div class="solution-item">
+                    <div class="solution-number">4</div>
+                    <h3>Toda Família</h3>
+                    <p>Cobertura para até 4 pessoas por apenas R$ 39,90/mês</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2>O que Você Vai Ter Acesso</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🩺</div>
+                    <h3>Consultas Médicas</h3>
+                    <p>Clínico geral, pediatra, ginecologista e mais de 30 especialidades com desconto</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔬</div>
+                    <h3>Exames Laboratoriais</h3>
+                    <p>Sangue, urina, fezes e exames de imagem com preços especiais</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🦷</div>
+                    <h3>Odontologia</h3>
+                    <p>Consultas, limpeza, obturações e tratamentos odontológicos</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💊</div>
+                    <h3>Medicamentos</h3>
+                    <p>Descontos em farmácias credenciadas para toda família</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💆</div>
+                    <h3>Estética e Bem-estar</h3>
+                    <p>Massagens, tratamentos estéticos e cuidados pessoais</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🍽️</div>
+                    <h3>Alimentação e Lazer</h3>
+                    <p>Descontos em restaurantes, cinemas e atividades de lazer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>O que Nossos Associados Dizem</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-text">"Finalmente encontrei uma solução que cabe no meu bolso! Consegui levar minha filha ao pediatra no mesmo dia que ela ficou doente."</div>
+                    <div class="testimonial-author">- Maria Santos, Recepcionista</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">"Os descontos são reais! Economizei mais de R$ 200 só no primeiro mês com exames que precisava fazer."</div>
+                    <div class="testimonial-author">- João Silva, Motorista</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">"Muito prático pelo WhatsApp. Consegui agendar consulta para minha mãe em poucos minutos."</div>
+                    <div class="testimonial-author">- Ana Oliveira, Vendedora</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta" id="cta">
+        <div class="container">
+            <h2>Não Deixe sua Família Desprotegida</h2>
+            <p>Junte-se a mais de 10.000 famílias que já garantiram acesso à saúde de qualidade</p>
+            
+            <div class="urgency">
+                ⚡ OFERTA ESPECIAL: Primeira mensalidade por apenas R$ 19,90
+            </div>
+            
+            <div>
+                <a href="https://wa.me/5511996076495?text=Olá! Quero aderir ao Clube de Benefícios com desconto especial" class="cta-button whatsapp-btn" >💬 Aderir Agora no WhatsApp</a>
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 0.9rem;">✅ Sem carência | ✅ Sem burocracia | ✅ Ativação imediata</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Clube de Benefícios SP. Todos os direitos reservados.</p>
+            <p>📍 Av. Satélite, 112 | Cidade Satelite
+Santa Barbara | São Paulo/SP | 📞 (11) 99607-6495 | 📧 clubeuperasaude@clubesuperasaude.com.br</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/5511996076495?text=Olá! Tenho interesse no Clube de Benefícios" class="floating-whatsapp" >
+        💬
+    </a>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all benefit cards and solution items
+        document.querySelectorAll('.benefit-card, .solution-item, .testimonial').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
